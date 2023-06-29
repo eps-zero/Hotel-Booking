@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rooms',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +85,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5431',
         'OPTIONS': {
-            'options': '-c search_path=public'  # Указывает использование схемы "public"
+            'options': '-c search_path=public'
         }
     }
 }
@@ -140,5 +143,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.AllowAny',
+
     ],
 }
