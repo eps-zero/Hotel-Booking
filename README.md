@@ -20,23 +20,23 @@ Hotel Booking is a Django-based backend web application for managing hotel rooms
    ```
    cd hotel-booking
    ```
-3. nstall the required dependencies:
+3. Install the required dependencies:
    ```
    pip install -r requirements.txt
    ```
-4. Type in terminal:
+5. Type in terminal:
    ```
    psql -U postgres
    ```
-5. Create database:
+6. Create database:
    ```
    CREATE DATABASE your_database_name;
    ```
-6. Create user:
+7. Create user:
    ```
    CREATE USER your_user_name;
    ```
-7. In  file settings.py find section DATABASES and change it to:
+8. In  file settings.py find section DATABASES and change it to:
    ```
    'ENGINE': 'django.db.backends.postgresql',
    'NAME': 'your_database_name',
@@ -54,26 +54,50 @@ Hotel Booking is a Django-based backend web application for managing hotel rooms
    'HOST': 'localhost',
    'PORT': '5431',
    ```
-8. Apply the database migrations:
+9. Apply the database migrations:
    ```
    python manage.py migrate
    ```
-9. Create superuser:
-   ```
-   python manage.py createsuperuser
-   ```
-10. Start the development server:
-   ```
-   python manage.py runserver
-   ```
-11. Open your web browser and visit http://localhost:8000 to access the application.
+10. Create superuser:
+      ```
+      python manage.py createsuperuser
+      ```
+11. Start the development server:
+      ```
+      python manage.py runserver
+      ```
+11. Open your web browser and visit `http://localhost:8000` to access the application.
    
 
 ## Usage
+Here is a description for each URL in the README.md file:
 
-   Access the home page to view available rooms and make reservations.
-   Register an account or log in to access additional features.
-   Use the admin panel to manage rooms and reservations.
+   - `/admin/` - This URL is used for accessing the admin interface of the application. It provides a web-based administration panel for managing the site's data.
+
+   - `/rooms/` - This URL is used for accessing the list view of rooms. It is associated with the RoomListView class-based view, which allows filtering of rooms based on various parameters. The view accepts the following optional query parameters:
+
+    - min_price (optional) - Filters rooms by a minimum price per day.
+    - max_price (optional) - Filters rooms by a maximum price per day.
+    - capacity (optional) - Filters rooms by their capacity.
+    - ordering (optional) - Orders the rooms based on a specific criterion, such as price (ascending), -price (descending), capacity (ascending), or -capacity (descending).
+    - check_in_date (optional) - Filters rooms based on availability starting from the specified check-in date. The format should be YYYY-MM-DD.
+    - check_out_date (optional) - Filters rooms based on availability up to the specified check-out date. The format should be YYYY-MM-DD.
+
+The RoomListView class retrieves the queryset of Room objects and applies the provided filters. It excludes any rooms that are already reserved within the specified date range. The resulting list of rooms is then serialized using the RoomSerializer and returned as a response.
+
+Example usage: `http://localhost:8000/rooms/?min_price=50&capacity=2&ordering=price`
+
+   - `/rooms/create/` - This URL is used for creating a new room. It is associated with the RoomCreateView class-based view and provides a form for creating a room. Only admin can use it.
+
+   - `/reservations/` - This URL is used for accessing the list view of reservations. It is associated with the ReservationListView class-based view and displays a list of existing reservations. Only autorized users can see their reservations.
+
+   - `/reservations/create` - This URL is used for creating a new reservation. It is also associated with the ReservationListView class-based view and provides a form for creating a reservation. Only autorized users can create reservations.
+
+   - `/reservations/{your_reservation_id}/` - This URL is used for accessing the detail view of a reservation. The {your_reservation_id} part represents the reservation's primary key. It is associated with the ReservationDetailView class-based view and displays detailed information about a specific reservation.
+
+   - `/signup/` - This URL is used for user sign-up functionality. It is associated with the UserSignUpView class-based view and provides a form for users to create a new account just using username and password.
+
+   - `/login/` - This URL is used for user login functionality. It is associated with the UserLoginView class-based view and provides a form for users to log in to their existing accounts. By typing in username and password it returns users token that provides him to acsess to private pages.
 
 ## Contributing
 
