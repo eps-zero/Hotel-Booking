@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Room List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .room-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        
+        .room-item h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .room-item p {
+            margin: 5px 0;
+        }
+        
+        .room-item a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .room-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .filter-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        
+        .filter-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .filter-container input[type="text"],
+        .filter-container input[type="number"],
+        .filter-container input[type="date"],
+        .filter-container select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .filter-container input[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Room List</h1>
+    
+    <div class="filter-container">
+        <h2>Filter Rooms</h2>
+        <form action="" method="GET">
+            <label for="min-price">Minimum Price:</label>
+            <input type="number" id="min-price" name="min_price">
+            
+            <label for="max-price">Maximum Price:</label>
+            <input type="number" id="max-price" name="max_price">
+            
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity">
+            
+            <label for="check-in-date">Check-in Date:</label>
+            <input type="date" id="check-in-date" name="check_in_date">
+            
+            <label for="check-out-date">Check-out Date:</label>
+            <input type="date" id="check-out-date" name="check_out_date">
+            
+            <label for="ordering">Order by:</label>
+            <select id="ordering" name="ordering">
+                <option value="price">Price</option>
+                <option value="-price">Price (Descending)</option>
+                <option value="capacity">Capacity</option>
+                <option value="-capacity">Capacity (Descending)</option>
+            </select>
+            
+            <input type="submit" value="Filter">
+        </form>
+    </div>
+    
+    <ul>
+        {% for room in rooms %}
+        <li>
+            <div class="room-item">
+                <h2><a href="#">{{ room.room_number }}</a></h2>
+                <p>Room name: {{ room.name }}</p>
+                <p>Price: {{ room.price_per_day }}</p>
+                <p>Capacity: {{ room.capacity }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+`

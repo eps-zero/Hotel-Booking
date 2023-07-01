@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation List</title>
+</head>
+<body>
+    <h1>Reservation List</h1>
+    <ul>
+        {% for reservaion in reservations %}
+        <div class="reservation-item">
+            <h2><a></a>{{ reservation.reservation_number }}</h2>
+            <p> Room: {{ reservation.room }}</p>
+            <p> Start: {{ reservation.start_booking_date }}</p>
+            <p> End: {{ reservation.end_booking_date }}</p>
+        </div>
+        {% endfor %}
+    </ul>
+</body>
+</html>

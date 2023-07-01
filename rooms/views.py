@@ -15,6 +15,7 @@ class RoomListView(generics.ListAPIView):
 
     def get_queryset(self):
         params = self.request.GET
+        
         min_price = params.get("min_price")
         max_price = params.get("max_price")
         capacity = params.get("capacity")
@@ -44,46 +45,33 @@ class RoomListView(generics.ListAPIView):
             elif ordering == "-capacity":
                 queryset = queryset.order_by("-capacity")
 
-            if check_in_date:
+            if check_in_date and check_out_date:
+
                 try:
-                    check_in_date = datetime.datetime.strptime(
-                        check_in_date, "%Y-%m-%d"
-                    ).date()
-                    filter_kwargs["end_booking_date__gte"] = check_in_date
+                    check_in_date = datetime.datetime.strptime(check_in_date, "%Y-%m-%d").date()
+                    check_out_date = datetime.datetime.strptime(check_out_date, "%Y-%m-%d").date()
                 except ValueError:
-                    raise ValueError(
-                        "Invalid check-in date format. Please use YYYY-MM-DD format."
-                    )
+                    raise ValueError("Invalid date format. Please use YYYY-MM-DD format.")
 
-            if check_out_date:
-                try:
-                    check_out_date = datetime.datetime.strptime(
-                        check_out_date, "%Y-%m-%d"
-                    ).date()
-                    filter_kwargs["start_booking_date__lte"] = check_out_date
-                except ValueError:
-                    raise ValueError(
-                        "Invalid check-out date format. Please use YYYY-MM-DD format."
-                    )
-
-                if check_in_date:
-                    if check_in_date > check_out_date:
-                        raise ValueError("Check-in date must be before check-out date.")
-
-            reserved_rooms = Reservation.objects.filter(**filter_kwargs).values_list(
-                "room_id", flat=True
-            )
-
-            queryset = queryset.exclude(id__in=reserved_rooms)
+                # Выполняем фильтрацию комнат
+                reserved_rooms_start = Reservation.objects.filter(
+                    start_booking_date__lte=check_out_date,
+                    start_booking_date__gte=check_in_date
+                ).values_list("room", flat=True)
+                reserved_rooms_end = Reservation.objects.filter(
+                    end_booking_date__gte=check_in_date,
+                    end_booking_date__lte=check_out_date
+                ).values_list("room", flat=True)
+                reserved_rooms = (set(reserved_rooms_start) | set(reserved_rooms_end))
+                queryset = queryset.exclude(id__in=reserved_rooms)
 
         return queryset
-
-    def get(self, request, *args, **kwargs):
+    
+    def get(self, *args, **kwargs):
         try:
             queryset = self.get_queryset()
             serializer = RoomSerializer(queryset, many=True)
             return Response(serializer.data)
-
         except ValueError as e:
             return Response({"error": str(e)}, status=400)
 
@@ -145,3 +133,4 @@ class UserLoginView(APIView):
             return Response({"token": token.key})
         else:
             return Response({"error": "Invalide credentials"})
+
