@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_spectacular',
     'rooms',
 ]
 
@@ -146,4 +147,5 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.AllowAny',
 
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema', 
 }

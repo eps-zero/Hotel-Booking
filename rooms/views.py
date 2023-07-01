@@ -90,11 +90,6 @@ class RoomCreateView(generics.CreateAPIView):
     permission_classes = (permissions.IsAdminUser,)
 
 
-class RoomDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
-
 class ReservationListView(generics.ListAPIView):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
