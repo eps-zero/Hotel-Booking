@@ -4,15 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('rooms', '0001_initial'),
+        ("rooms", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='reservation',
-            old_name='end_booking_sate',
-            new_name='end_booking_date',
+            model_name="reservation",
+            old_name="end_booking_sate",
+            new_name="end_booking_date",
         ),
     ]
