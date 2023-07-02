@@ -8,6 +8,7 @@ class RoomSerializer(serializers.ModelSerializer):
         model = Room
         fields = ["id", "room_number", "name", "price_per_day", "capacity"]
 
+
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
@@ -23,6 +24,11 @@ class ReservationSerializer(serializers.ModelSerializer):
             start_booking_date__lte=end_booking_date,
             end_booking_date__gte=start_booking_date,
         ).exists()
+
+        if start_booking_date > end_booking_date:
+            raise serializers.ValidationError(
+                "Check in date should be earlier that check out date."
+            )
 
         if existing_reservation:
             raise serializers.ValidationError(

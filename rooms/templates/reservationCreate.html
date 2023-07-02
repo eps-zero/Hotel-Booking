@@ -1,0 +1,21 @@
+{% extends 'base_template.html' %}
+{% block content %}
+    <h2>Create Reservation</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+        <label for="room">Room number:</label>
+        <select name="room" id="room">
+            {% for room in rooms %}
+                <option value="{{ room.id }}">{{ room.room_number }}</option>
+            {% endfor %}
+        </select>
+        <label for="start_booking_date">Check in:</label>
+        <input type="date" id="start_booking_date" name="start_booking_date" required>
+
+        <label for="end_booking_date">Check out:</label>
+        <input type="date" id="end_booking_date" name="end_booking_date" required>
+
+        <input type="submit" value="Забронировать">
+    </form>
+{% endblock %}

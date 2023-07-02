@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Reservation List</title>
-</head>
-<body>
+{% extends 'base_template.html' %}
+{% block content %}
     <h1>Reservation List</h1>
     <ul>
-        {% for reservaion in reservations %}
-        <div class="reservation-item">
-            <h2><a></a>{{ reservation.reservation_number }}</h2>
+        {% for reservation in reservations %}
+        <div class="room-item">
+            <p> User: {{ reservation.user }}</p>
             <p> Room: {{ reservation.room }}</p>
             <p> Start: {{ reservation.start_booking_date }}</p>
             <p> End: {{ reservation.end_booking_date }}</p>
+            <form action="/reservations/{{ reservation.id }}/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="_method" value="delete">
+                <input class="filter-container" type="submit" value="Delete">
+            </form>
+            
         </div>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
