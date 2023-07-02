@@ -97,7 +97,12 @@ Example usage: `http://localhost:8000/rooms/?min_price=50&capacity=2&ordering=pr
 
    - `/signup/` - This URL is used for user sign-up functionality. It is associated with the UserSignUpView class-based view and provides a form for users to create a new account just using username and password.
 
-   - `/login/` - This URL is used for user login functionality. It is associated with the UserLoginView class-based view and provides a form for users to log in to their existing accounts. By typing in username and password it returns users token that provides him to acsess to private pages.
+   - `/login/` - This URL is used for user login functionality. It is associated with the UserLoginView class-based view and provides a form for users to log in to their existing accounts.
+   - `/front/rooms` -  directory contains the HTML page responsible for displaying the list of rooms. Users can view available rooms and their details on this page.
+   
+   - `/front/reservations` - directory houses the HTML page for viewing the list of reservations. Users can see their existing reservations and relevant details on this page.
+   
+   - `/front/reservations/creat`e directory stores the HTML page used to create a new reservation. Only registered users have the privilege to view this page and create reservations. 
 
 ## Contributing
 
