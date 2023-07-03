@@ -87,8 +87,6 @@ The RoomListView class retrieves the queryset of Room objects and applies the pr
 
 Example usage: `http://localhost:8000/rooms/?min_price=50&capacity=2&ordering=price`
 
-   - `/rooms/create/` - This URL is used for creating a new room. It is associated with the RoomCreateView class-based view and provides a form for creating a room. Only admin can use it.
-
    - `/reservations/` - This URL is used for accessing the list view of reservations. It is associated with the ReservationListView class-based view and displays a list of existing reservations. Only autorized users can see their reservations.
 
    - `/reservations/create` - This URL is used for creating a new reservation. It is also associated with the ReservationListView class-based view and provides a form for creating a reservation. Only autorized users can create reservations.
