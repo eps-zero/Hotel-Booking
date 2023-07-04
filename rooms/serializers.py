@@ -1,18 +1,33 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from .models import Room, Reservation
+from django.contrib.auth.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "password"]
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data["username"], password=validated_data["password"]
+        )
+        return user
 
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ["id", "room_number", "name", "price_per_day", "capacity"]
+        fields = ["id", "room_number", "price_per_day", "capacity"]
 
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ["id", "user", "room", "start_booking_date", "end_booking_date"]
+        fields = ["id", "user", "room",
+                  "start_booking_date", "end_booking_date"]
 
     def create(self, validated_data):
         room_id = validated_data["room"].id
@@ -38,10 +53,3 @@ class ReservationSerializer(serializers.ModelSerializer):
         reservation = Reservation.objects.create(**validated_data)
 
         return reservation
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["id", "username", "password"]
-        extra_kwargs = {"password": {"write_only": True}}

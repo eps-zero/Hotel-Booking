@@ -10,7 +10,8 @@ from datetime import date
 class RoomViewSetTest(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(username="admin", password="mikeTyson")
+        self.user = User.objects.create_user(
+            username="admin", password="mikeTyson")
         self.client.force_authenticate(user=self.user)
         self.room = Room.objects.create(
             room_number="101",
@@ -29,7 +30,8 @@ class RoomViewSetTest(TestCase):
 class ReservationViewSetTest(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(username="admin", password="mikeTyson")
+        self.user = User.objects.create_user(
+            username="admin", password="mikeTyson")
         self.client.force_authenticate(user=self.user)
         self.room = Room.objects.create(
             room_number="101",

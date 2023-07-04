@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 class Room(models.Model):
     room_number = models.CharField(max_length=20, unique=True)
-    name = models.CharField(max_length=100)
     price_per_day = models.DecimalField(max_digits=8, decimal_places=2)
     capacity = models.PositiveIntegerField()
 

@@ -6,9 +6,19 @@ from rooms.front_views import (
     FrontReservationListView,
     FrontReservationCreateView,
     FrontReservationDetailView,
+    FrontSignupView,
+    FrontLoginView,
+    FrontLogoutView,
 )
-from rooms.views import RoomListView, ReservationListView, ReservationCreateView
-from accounts.views import signup_view, login_view, logout_view
+from rooms.views import (
+    RoomListView,
+    ReservationListView,
+    ReservationCreateView,
+    SignupView,
+    LoginView,
+    LogoutView,
+)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,9 +34,9 @@ urlpatterns = [
         FrontReservationDetailView.as_view(),
         name="reservation-detail",
     ),
-    path("signup/", signup_view, name="signup"),
-    path("login/", login_view, name="login"),
-    path("logout/", logout_view, name="logout"),
+    path("signup/", SignupView.as_view(), name="signup"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
     path("front/rooms/", FrontRoomListView.as_view(), name="front-room-list"),
     path(
         "front/reservations/",
@@ -38,6 +48,9 @@ urlpatterns = [
         FrontReservationCreateView.as_view(),
         name="front-reservation-create",
     ),
+    path("front/signup/", FrontSignupView.as_view(), name="front-signup"),
+    path("front/login/", FrontLoginView.as_view(), name="front-login"),
+    path("front/logout/", FrontLogoutView.as_view(), name="front-logout"),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
 ]

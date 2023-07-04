@@ -178,18 +178,18 @@
             <ul>
                 {% if user.is_authenticated %}
                 <li>
-                    <form class="logout-link" action="/logout/" method="post">
+                    <form class="logout-link" action="/front/logout/" method="post">
                         {% csrf_token %}
                         <button type="submit">Logout</button>
                     </form>
                 </li>
                 {% else %}
                 <li>
-                    <form class="logout-link" action="/login/" method="post">
+                    <form class="logout-link" action="/front/login/" method="get">
                         {% csrf_token %}
                         <button type="submit">Login</button>
                     </form>
-                    <form class="logout-link" action="/signup/" method="post">
+                    <form class="logout-link" action="/front/signup/" method="get">
                         {% csrf_token %}
                         <button type="submit">Signup</button>
                     </form>

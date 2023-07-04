@@ -22,7 +22,8 @@ class RoomModelTest(TestCase):
 
 class ReservationModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="admin", password="mikeTyson")
+        self.user = User.objects.create_user(
+            username="admin", password="mikeTyson")
         self.room = Room.objects.create(
             room_number="101",
             name="Fifth floar terrace room",

@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+{% block content %}
+
+    <h1>Sign up</h1>
+    <form method="post" action="/front/signup/">
+        {% csrf_token %}
+        <div>
+            <label for="id_username">Username:</label>
+            <input type="text" id="id_username" name="username" required>
+        </div>
+        <div>
+            <label for="id_password">Password:</label>
+            <input type="password" id="id_password" name="password" required>
+        </div>
+        <button type="submit">Signup</button>
+    </form>
+    </form>
+{% endblock %}
