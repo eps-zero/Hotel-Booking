@@ -14,7 +14,7 @@ Hotel Booking is a Django-based backend web application for managing hotel rooms
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/hotel-booking.git
+   git clone https://github.com/eps-zero/hotel-booking.git
    ```
 2. Navigate to the project directory:
    ```
@@ -100,7 +100,12 @@ Example usage: `http://localhost:8000/rooms/?min_price=50&capacity=2&ordering=pr
    
    - `/front/reservations` - directory houses the HTML page for viewing the list of reservations. Users can see their existing reservations and relevant details on this page.
    
-   - `/front/reservations/creat`e directory stores the HTML page used to create a new reservation. Only registered users have the privilege to view this page and create reservations. 
+   - `/front/reservations/creat`e directory stores the HTML page used to create a new reservation. Only registered users have the privilege to view this page and create reservations.
+
+## Screens
+![Room List](/screens/screen1.png)
+![Reservation List](/screens/screen2.png)
+![Reservation Create](/screens/screen3.png)
 
 ## Contributing
 
