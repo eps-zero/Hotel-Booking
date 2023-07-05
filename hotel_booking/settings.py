@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ  # Initialise environment variables
-
 env = environ.Env()
 environ.Env.read_env()
 
@@ -23,8 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-SECRET_KEY = env("SECRET_KEY")
-DEBUG = env("DEBUG") == "True"
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG') == "True"
 
 ALLOWED_HOSTS = []
 
@@ -127,7 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = env.str('STATIC_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
